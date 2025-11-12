@@ -3,7 +3,7 @@
 ### What is it?
 ASEAN LinguaBot is a multi-lingual support bot designed for ASEAN based countries. Its mission? To prove the value of language inclusive support for technical teams and managed service providers. No more lost in translation moments your customers get the help they need, in the language they speak.
 
-###Why does it matter?
+### Why does it matter?
 In a region as diverse as ASEAN, language can be the biggest barrier to delivering world class technical support. This bot demonstrates how Azure AI services can empower support teams with the right technical skills AND seamless communication, regardless of language.
 
 ### What’s the catch?

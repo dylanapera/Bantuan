@@ -1,12 +1,5 @@
-// DOM Elements
-const chatMessages = document.getElementById('chatMessages');
-const messageInput = document.getElementById('messageInput');
-const sendBtn = document.getElementById('sendBtn');
-const voiceBtn = document.getElementById('voiceBtn');
-const clearChat = document.getElementById('clearChat');
-const downloadChat = document.getElementById('downloadChat');
-const languageSelect = document.getElementById('languageSelect');
-const categoryBtns = document.querySelectorAll('.category-btn');
+// DOM Elements with error handling
+let chatMessages, messageInput, sendBtn, voiceBtn, clearChat, downloadChat, languageSelect, categoryBtns;
 
 // State
 let currentLanguage = 'en';
@@ -16,54 +9,87 @@ let recognition = null;
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
+    try {
+        chatMessages = document.getElementById('chatMessages');
+        messageInput = document.getElementById('messageInput');
+        sendBtn = document.getElementById('sendBtn');
+        voiceBtn = document.getElementById('voiceBtn');
+        clearChat = document.getElementById('clearChat');
+        downloadChat = document.getElementById('downloadChat');
+        languageSelect = document.getElementById('languageSelect');
+        categoryBtns = document.querySelectorAll('.category-btn');
+        
+        if (!chatMessages || !messageInput) {
+            throw new Error('Required DOM elements not found. Check that index.html is properly loaded.');
+        }
+        
+        initializeApp();
+    } catch (error) {
+        console.error('Failed to initialize Bantuan Bot:', error);
+        document.body.innerHTML = '<div style="padding: 2rem; color: red; font-size: 1.2rem;">Error loading application. Please check the browser console.</div>';
+    }
 });
 
 function initializeApp() {
-    setupEventListeners();
-    setupSpeechRecognition();
-    updateChatPlaceholder();
-    
-    // Focus on input for better UX
-    messageInput.focus();
-    
-    console.log('Bantuan Support Bot initialized successfully!');
+    try {
+        setupEventListeners();
+        setupSpeechRecognition();
+        updateChatPlaceholder();
+        
+        // Focus on input for better UX
+        if (messageInput) {
+            messageInput.focus();
+        }
+        
+        console.log('🚀 Bantuan Support Bot initialized successfully!');
+        console.log('📍 Current environment: ' + (window.location.hostname || 'localhost'));
+    } catch (error) {
+        console.error('Error during initialization:', error);
+    }
 }
 
 function setupEventListeners() {
-    // Send message events
-    sendBtn.addEventListener('click', handleSendMessage);
-    messageInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            handleSendMessage();
-        }
-    });
-
-    // Voice input
-    voiceBtn.addEventListener('click', toggleVoiceRecognition);
-
-    // Clear chat
-    clearChat.addEventListener('click', handleClearChat);
-
-    // Download chat
-    downloadChat.addEventListener('click', handleDownloadChat);
-
-    // Language selection
-    languageSelect.addEventListener('change', handleLanguageChange);
-
-    // Category selection
-    categoryBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            handleCategoryChange(this.dataset.category, this);
+    try {
+        // Send message events
+        if (sendBtn) sendBtn.addEventListener('click', handleSendMessage);
+        if (messageInput) messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSendMessage();
+            }
         });
-    });
 
-    // Auto-resize input
-    messageInput.addEventListener('input', function() {
-        this.style.height = 'auto';
-        this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-    });
+        // Voice input
+        if (voiceBtn) voiceBtn.addEventListener('click', toggleVoiceRecognition);
+
+        // Clear chat
+        if (clearChat) clearChat.addEventListener('click', handleClearChat);
+
+        // Download chat
+        if (downloadChat) downloadChat.addEventListener('click', handleDownloadChat);
+
+        // Language selection
+        if (languageSelect) languageSelect.addEventListener('change', handleLanguageChange);
+
+        // Category selection
+        if (categoryBtns && categoryBtns.length > 0) {
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    handleCategoryChange(this.dataset.category, this);
+                });
+            });
+        }
+
+        // Auto-resize input
+        if (messageInput) {
+            messageInput.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+            });
+        }
+    } catch (error) {
+        console.error('Error setting up event listeners:', error);
+    }
 }
 
 function setupSpeechRecognition() {

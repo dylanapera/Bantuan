@@ -18,6 +18,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check front-end files
+        run: |
+          echo "Checking front-end directory contents:"
+          ls -la front-end/
+          echo ""
+          echo "Verifying critical files:"
+          test -f front-end/index.html && echo "✓ index.html exists" || echo "✗ index.html MISSING"
+          test -f front-end/styles.css && echo "✓ styles.css exists" || echo "✗ styles.css MISSING"
+          test -f front-end/script.js && echo "✓ script.js exists" || echo "✗ script.js MISSING"
+          test -f front-end/web.config && echo "✓ web.config exists" || echo "✗ web.config MISSING"
+
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
@@ -40,9 +51,28 @@ jobs:
           name: front-end-app
           path: .
 
+      - name: Display deployment files
+        run: |
+          echo "Files being deployed:"
+          ls -la
+          echo ""
+          echo "Verifying web.config for IIS:"
+          head -20 web.config
+
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: .
+
+      - name: Deployment Summary
+        run: |
+          echo "✓ Deployment completed successfully!"
+          echo "Web App URL: ${{ steps.deploy-to-webapp.outputs.webapp-url }}"
+          echo ""
+          echo "Next steps:"
+          echo "1. Visit your web app URL"
+          echo "2. Hard refresh (Ctrl+Shift+R) to clear cache"
+          echo "3. Check browser console (F12) for any errors"

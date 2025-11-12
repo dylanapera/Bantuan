@@ -143,11 +143,94 @@ function handleSendMessage() {
     messageInput.value = '';
     messageInput.style.height = 'auto';
 
-    // Simulate bot response
-    setTimeout(() => {
-        const botResponse = generateBotResponse(message);
-        addMessage('bot', botResponse);
-    }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
+    // Show loading indicator
+    showStatusMessage('Processing your request...', 'info');
+
+    // Call backend API
+    sendMessageToBackend(message);
+}
+
+async function sendMessageToBackend(message) {
+    try {
+        // Determine backend API endpoint
+        const apiEndpoint = getApiEndpoint();
+        const fullUrl = `${apiEndpoint}/api/chat`;
+        
+        console.log('📤 Sending message to backend:', {
+            url: fullUrl,
+            message: message,
+            language: currentLanguage,
+            category: currentCategory
+        });
+        
+        const response = await fetch(fullUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: message,
+                language: currentLanguage,
+                category: currentCategory
+            })
+        });
+
+        console.log('📥 Backend response status:', response.status, response.statusText);
+
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log('📨 Backend response data:', data);
+        
+        if (data.status === 'success') {
+            hideStatusMessage();
+            addMessage('bot', data.response);
+        } else {
+            throw new Error(data.error || 'Unknown error from API');
+        }
+    } catch (error) {
+        console.error('❌ Error communicating with backend:', error);
+        hideStatusMessage();
+        showStatusMessage(`Error: ${error.message}`, 'error');
+        // Fallback to local response if API fails
+        setTimeout(() => {
+            const fallbackResponse = generateBotResponse(message);
+            addMessage('bot', fallbackResponse);
+        }, 1000);
+    }
+}
+
+function getApiEndpoint() {
+    // Determine API endpoint based on environment
+    const hostname = window.location.hostname;
+    const protocol = window.location.protocol;
+    
+    // If opening index.html as file:// (local file), try localhost backend
+    if (protocol === 'file:') {
+        return 'http://localhost:5000';
+    }
+    
+    // If running on localhost server, use localhost backend
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        return 'http://localhost:5000';
+    }
+    
+    // If running on Azure Static Web App, use the separate backend Web App
+    // This is the Flask app running on Azure App Service
+    if (hostname.includes('azurestaticapps.net')) {
+        return 'https://bantuan-bjgjgwgrhmcwetah.australiaeast-01.azurewebsites.net';
+    }
+    
+    // Fallback: check sessionStorage for custom backend URL
+    const backendUrl = sessionStorage.getItem('backendUrl');
+    if (backendUrl) {
+        return backendUrl;
+    }
+    
+    // Default fallback
+    return `${protocol}//${hostname}`;
 }
 
 function addMessage(sender, text) {

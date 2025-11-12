@@ -10,11 +10,11 @@ In a region as diverse as ASEAN, language can be the biggest barrier to deliveri
 This is not a high performance production solution. It’s a proof of concept to showcase the power of an all Azure service stack—from Cognitive Services to Bot Framework—working together to crush language barriers.
 
 ### Tech Stack Highlights:
-  Azure Cognitive Services (Translator, Speech, Language Understanding)
-  Azure Bot Service for conversational flow
-  Azure OpenAI Service for natural dialogue
-  Azure Functions & Logic Apps for orchestration
-  Azure Storage & App Service for hosting
+- Azure Cognitive Services (Translator, Speech, Language Understanding)
+-  Azure Bot Service for conversational flow
+-  Azure OpenAI Service for natural dialogue
+-  Azure Functions & Logic Apps for orchestration
+-  Azure Storage & App Service for hosting
 
 ### Disclaimer:
 This is a fun, experimental project—built for learning and inspiration. It’s not actively maintained, and there are no guarantees of performance or support. Use it responsibly and have fun exploring the power of Azure AI!

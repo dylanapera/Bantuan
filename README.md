@@ -1,12 +1,16 @@
-# Bantuan
-This is a multi-lingual support bot for ASEAN based countries.
+# Project Bantuan – Breaking Barriers, Building Connections
+### What is it?
+ASEAN LinguaBot is a multi-lingual support bot designed for ASEAN-based countries. Its mission? To prove the value of language-inclusive support for technical teams and managed service providers. No more lost-in-translation moments—your customers get the help they need, in the language they speak.
+###Why does it matter?
+In a region as diverse as ASEAN, language can be the biggest barrier to delivering world-class technical support. This bot demonstrates how Azure AI services can empower support teams with the right technical skills AND seamless communication, regardless of language.
+### What’s the catch?
+This is not a high-performance production solution. It’s a proof-of-concept to showcase the power of an all-Azure service stack—from Cognitive Services to Bot Framework—working together to crush language barriers.
+### Tech Stack Highlights:
+- Azure Cognitive Services (Translator, Speech, Language Understanding)
+- Azure Bot Service for conversational flow
+- Azure OpenAI Service for natural dialogue
+- Azure Functions & Logic Apps for orchestration
+- Azure Storage & App Service for hosting
 
-## Goals
-- Showcase the power of key Azure services
-- A baseline (general purpose) support bot using AI App Development techniques and Azure services
-
-### Project Name Meaning
-Bantuan - to help or aid. This is in theme of a ASEAN support bot
-
-# Disclaimer
-This is a fun, experimental project created for entertainment and learning purposes only. It is not actively maintained, and there are no guarantees of functionality, security, or support. Anyone using this project does so at their own risk—please use it responsibly and just have fun with it!
+Disclaimer:
+This is a fun, experimental project—built for learning and inspiration. It’s not actively maintained, and there are no guarantees of performance or support. Use it responsibly and have fun exploring the power of Azure AI!

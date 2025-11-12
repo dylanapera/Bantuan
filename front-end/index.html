@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bantuan - Multi-lingual Support Bot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>Bantuan</span>
+                </div>
+                <div class="header-info">
+                    <span class="status-indicator online"></span>
+                    <span class="status-text">Online</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-language"></i> Language</h3>
+                    <select id="languageSelect" class="language-select">
+                        <option value="en">English</option>
+                        <option value="id">Bahasa Indonesia</option>
+                        <option value="ms">Bahasa Malaysia</option>
+                        <option value="th">ไทย (Thai)</option>
+                        <option value="vi">Tiếng Việt</option>
+                        <option value="tl">Filipino</option>
+                        <option value="my">မြန်မာ (Myanmar)</option>
+                        <option value="km">ខ្មែរ (Khmer)</option>
+                        <option value="lo">ລາວ (Lao)</option>
+                        <option value="bn">বাংলা (Bengali)</option>
+                    </select>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-headset"></i> Support Categories</h3>
+                    <div class="category-buttons">
+                        <button class="category-btn active" data-category="general">
+                            <i class="fas fa-question-circle"></i>
+                            General Support
+                        </button>
+                        <button class="category-btn" data-category="technical">
+                            <i class="fas fa-cog"></i>
+                            Technical Issues
+                        </button>
+                        <button class="category-btn" data-category="account">
+                            <i class="fas fa-user"></i>
+                            Account Help
+                        </button>
+                        <button class="category-btn" data-category="billing">
+                            <i class="fas fa-credit-card"></i>
+                            Billing
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-info-circle"></i> Bot Status</h3>
+                    <div class="bot-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Response Time</span>
+                            <span class="stat-value">~2s</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Available</span>
+                            <span class="stat-value">24/7</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Languages</span>
+                            <span class="stat-value">10+</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2>
+                        <i class="fas fa-comments"></i>
+                        Support Chat
+                    </h2>
+                    <div class="chat-controls">
+                        <button class="control-btn" id="clearChat" title="Clear Chat">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <button class="control-btn" id="downloadChat" title="Download Chat">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-sender">Bantuan Bot</span>
+                                <span class="message-time">Just now</span>
+                            </div>
+                            <div class="message-text">
+                                Hello! I'm Bantuan, your multi-lingual support assistant. I can help you in multiple ASEAN languages. How can I assist you today?
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-input-container">
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="messageInput" 
+                            placeholder="Type your message here... (Press Enter to send)"
+                            autocomplete="off"
+                        >
+                        <div class="input-controls">
+                            <button class="input-btn" id="voiceBtn" title="Voice Input">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <button class="input-btn primary" id="sendBtn" title="Send Message">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>
+                    <i class="fas fa-shield-alt"></i>
+                    Powered by Azure AI Services | 
+                    <span class="highlight">Experimental Project</span> | 
+                    ASEAN Region Support
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
